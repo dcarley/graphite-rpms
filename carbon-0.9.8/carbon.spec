@@ -54,18 +54,15 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 %{__mkdir_p} %{buildroot}%{_localstatedir}/spool/%{name}
 
 # Install system configuration and init scripts
-
 %{__install} -Dp -m0755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 %{__install} -Dp -m0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/%{name}
 
 # Install default configuration files
-
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/%{name}
 %{__install} -Dp -m0644 conf/carbon.conf.example %{buildroot}%{_sysconfdir}/%{name}/carbon.conf
 %{__install} -Dp -m0644 conf/storage-schemas.conf.example %{buildroot}%{_sysconfdir}/%{name}/storage-schemas.conf
 
 # Create transient files in buildroot for ghosting
-
 %{__mkdir_p} %{buildroot}%{_localstatedir}/lock/subsys
 %{__touch} %{buildroot}%{_localstatedir}/lock/subsys/%{name}
 
@@ -97,9 +94,9 @@ exit 0
 %defattr(-,root,root,-)
 %doc LICENSE PKG-INFO conf/*
 
-        %{python_sitelib}/*
-        /usr/bin/*
-        %{_initrddir}/%{name}
+%{python_sitelib}/*
+/usr/bin/*
+%{_initrddir}/%{name}
 
 %config %{_sysconfdir}/%{name}
 %config %{_sysconfdir}/sysconfig/%{name}

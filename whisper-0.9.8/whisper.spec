@@ -41,8 +41,8 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 %defattr(-,root,root,-)
 %doc LICENSE PKG-INFO
 
-     %{python_sitelib}/*
-     /usr/bin/*
+%{python_sitelib}/*
+/usr/bin/*
 
 %changelog
 * Tue Apr 20 2011 Chris Abernethy <cabernet@chrisabernethy.com> - 0.9.8-1

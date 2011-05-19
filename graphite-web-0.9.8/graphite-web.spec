@@ -55,7 +55,6 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 %{__touch} %{buildroot}%{_localstatedir}/spool/%{name}/graphite.db
 
 # Create log directory with ghost files
-
 %{__mkdir_p} %{buildroot}%{_localstatedir}/log/%{name}
 %{__touch} %{buildroot}%{_localstatedir}/log/%{name}/access.log
 %{__touch} %{buildroot}%{_localstatedir}/log/%{name}/error.log
@@ -63,13 +62,11 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 %{__touch} %{buildroot}%{_localstatedir}/log/%{name}/info.log
 
 # Create config directory and install configuration files
-
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/%{name}
 %{__install} -Dp -m0644 conf/dashboard.conf.example %{buildroot}%{_sysconfdir}/%{name}/dashboard.conf
 %{__install} -Dp -m0644 webapp/graphite/local_settings.py.example %{buildroot}%{_sysconfdir}/%{name}/local_settings.py
 
 # Install the example wsgi controller and vhost configuration
-
 %{__install} -Dp -m0755 conf/graphite.wsgi.example %{buildroot}/usr/share/graphite/%{name}.wsgi
 %{__install} -Dp -m0644 examples/example-graphite-vhost.conf %{buildroot}%{_sysconfdir}/httpd/conf.d/%{name}.conf
 
@@ -98,10 +95,10 @@ exit 0
 %defattr(-,root,root,-)
 %doc INSTALL LICENSE PKG-INFO README conf/* examples/*
 
-        %{python_sitelib}/*
-        /usr/bin/*
-        /usr/share/graphite
-        /etc/httpd/conf.d/%{name}.conf
+%{python_sitelib}/*
+/usr/bin/*
+/usr/share/graphite
+/etc/httpd/conf.d/%{name}.conf
 
 %config %{_sysconfdir}/%{name}
 
@@ -120,4 +117,4 @@ exit 0
 - Minor updates to spec file
 
 * Tue Mar 23 2010 Ilya Zakreuski <izakreuski@gmail.com> 0.9.5-1
-Initial release.
+- Initial release.
