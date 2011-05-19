@@ -83,10 +83,6 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 # Remove local_settings symlink
 %{__rm} -f %{python_sitelib}/graphite/local_settings.py
 
-%postun
-%{__service} httpd restart
-exit 0
-
 %clean
 [ "%{buildroot}" != "/" ] && %{__rm} -rf %{buildroot}
 
