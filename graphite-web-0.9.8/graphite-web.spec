@@ -49,10 +49,9 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 [ "%{buildroot}" != "/" ] && %{__rm} -rf %{buildroot}
 %{__python} -c 'import setuptools; execfile("setup.py")' install --skip-build --root %{buildroot}
 
-# Create spool directory with ghost files
-
-%{__mkdir_p} %{buildroot}%{_localstatedir}/spool/%{name}
-%{__touch} %{buildroot}%{_localstatedir}/spool/%{name}/graphite.db
+# Create var directory with ghost files
+%{__mkdir_p} %{buildroot}%{_localstatedir}/lib/%{name}
+%{__touch} %{buildroot}%{_localstatedir}/lib/%{name}/graphite.db
 
 # Create log directory with ghost files
 %{__mkdir_p} %{buildroot}%{_localstatedir}/log/%{name}
@@ -77,7 +76,7 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 
 # Initialize the database
 %{__python} %{python_sitelib}/graphite/manage.py syncdb --noinput >/dev/null
-%{__chown} apache:apache %{_localstatedir}/spool/%{name}/graphite.db
+%{__chown} apache:apache %{_localstatedir}/lib/%{name}/graphite.db
 
 %preun
 
@@ -108,8 +107,8 @@ exit 0
 %ghost %{_localstatedir}/log/%{name}/exception.log
 %ghost %{_localstatedir}/log/%{name}/info.log
 
-%attr(775,root,apache) %dir %{_localstatedir}/spool/%{name}
-%ghost %{_localstatedir}/spool/%{name}/graphite.db
+%attr(775,root,apache) %dir %{_localstatedir}/lib/%{name}
+%ghost %{_localstatedir}/lib/%{name}/graphite.db
 
 %changelog
 * Tue Apr 19 2011 Chris Abernethy <cabernet@chrisabernethy.com> - 0.9.8-1

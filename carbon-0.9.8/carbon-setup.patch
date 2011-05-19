@@ -17,9 +17,9 @@ diff -Nru a/setup.py b/setup.py
 -                 ('storage/log',[]), ('storage/rrd',[]) ]
 -conf_files = [ ('conf', glob('conf/*.example')) ]
 +storage_dirs = [
-+    ('/var/spool/carbon/whisper',[]),
-+    ('/var/spool/carbon/lists',[]),
-+    ('/var/spool/carbon/rrd',[])
++    ('/var/lib/carbon/whisper',[]),
++    ('/var/lib/carbon/lists',[]),
++    ('/var/lib/carbon/rrd',[])
 +]
  
  setup(

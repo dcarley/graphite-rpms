@@ -48,10 +48,9 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 [ "%{buildroot}" != "/" ] && %{__rm} -rf %{buildroot}
 %{__python} -c 'import setuptools; execfile("setup.py")' install --skip-build --root %{buildroot}
 
-# Create log and spool directories
-
+# Create log and var directories
 %{__mkdir_p} %{buildroot}%{_localstatedir}/log/%{name}
-%{__mkdir_p} %{buildroot}%{_localstatedir}/spool/%{name}
+%{__mkdir_p} %{buildroot}%{_localstatedir}/lib/%{name}
 
 # Install system configuration and init scripts
 %{__install} -Dp -m0755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
@@ -72,7 +71,7 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 %pre
 %{__getent} group %{name} >/dev/null || %{__groupadd} -r %{name}
 %{__getent} passwd %{name} >/dev/null || \
-    %{__useradd} -r -g %{name} -d %{_localstatedir}/spool/%{name} \
+    %{__useradd} -r -g %{name} -d %{_localstatedir}/lib/%{name} \
     -s /sbin/nologin -c "Carbon cache daemon" %{name}
 exit 0
 
@@ -102,7 +101,7 @@ exit 0
 %config %{_sysconfdir}/sysconfig/%{name}
 
 %attr(-,%name,%name) %{_localstatedir}/log/%{name}
-%attr(-,%name,%name) %{_localstatedir}/spool/%{name}
+%attr(-,%name,%name) %{_localstatedir}/lib/%{name}
 
 %ghost %{_localstatedir}/lock/subsys/%{name}
 %ghost %{_localstatedir}/run/%{name}.pid
