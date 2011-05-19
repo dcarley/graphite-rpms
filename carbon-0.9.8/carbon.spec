@@ -37,9 +37,9 @@ The backend for Graphite. Carbon is a data collection and storage agent.
 
 %prep
 %setup -q
-%patch0
-%patch1
-%patch2
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")' build

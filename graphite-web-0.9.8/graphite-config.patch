@@ -1,5 +1,16 @@
---- examples/example-graphite-vhost.conf.orig	2011-04-22 15:29:12.000000000 -0400
-+++ examples/example-graphite-vhost.conf	2011-04-22 15:29:12.000000000 -0400
+diff -ru a/conf/graphite.wsgi.example b/conf/graphite.wsgi.example
+--- a/conf/graphite.wsgi.example	2011-04-04 03:32:41.000000000 +0100
++++ b/conf/graphite.wsgi.example	2011-05-14 23:48:34.000000000 +0100
+@@ -1,5 +1,5 @@
+ import os, sys
+-sys.path.append('/opt/graphite/webapp')
++sys.path.append('/usr/share/graphite/webapp')
+ os.environ['DJANGO_SETTINGS_MODULE'] = 'graphite.settings'
+ 
+ import django.core.handlers.wsgi
+diff -ru a/examples/example-graphite-vhost.conf b/examples/example-graphite-vhost.conf
+--- a/examples/example-graphite-vhost.conf	2011-04-04 03:35:52.000000000 +0100
++++ b/examples/example-graphite-vhost.conf	2011-05-14 23:48:34.000000000 +0100
 @@ -1,47 +1,51 @@
  # This needs to be in your server's config somewhere, probably
  # the main httpd.conf
@@ -76,17 +87,9 @@
          </Directory>
  
  </VirtualHost>
---- conf/graphite.wsgi.example.orig	2011-04-22 15:29:12.000000000 -0400
-+++ conf/graphite.wsgi.example	2011-04-22 15:29:12.000000000 -0400
-@@ -1,5 +1,5 @@
- import os, sys
--sys.path.append('/opt/graphite/webapp')
-+sys.path.append('/usr/share/graphite/webapp')
- os.environ['DJANGO_SETTINGS_MODULE'] = 'graphite.settings'
- 
- import django.core.handlers.wsgi
---- webapp/graphite/settings.py.orig	2011-04-22 15:29:12.000000000 -0400
-+++ webapp/graphite/settings.py	2011-04-22 15:32:09.000000000 -0400
+diff -ru a/webapp/graphite/settings.py b/webapp/graphite/settings.py
+--- a/webapp/graphite/settings.py	2011-04-01 20:48:43.000000000 +0100
++++ b/webapp/graphite/settings.py	2011-05-14 23:48:34.000000000 +0100
 @@ -22,19 +22,20 @@
  # Filesystem layout (all directores should end in a /)
  WEB_DIR = dirname( abspath(__file__) ) + '/'

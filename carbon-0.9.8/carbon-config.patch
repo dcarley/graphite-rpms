@@ -1,5 +1,6 @@
---- conf/carbon.conf.example.orig	2011-04-21 14:56:25.000000000 -0400
-+++ conf/carbon.conf.example	2011-04-21 14:56:54.000000000 -0400
+diff -Nru a/conf/carbon.conf.example b/conf/carbon.conf.example
+--- a/conf/carbon.conf.example	2011-05-19 05:28:30.000000000 +0100
++++ b/conf/carbon.conf.example	2011-05-19 05:28:48.000000000 +0100
 @@ -1,10 +1,10 @@
  [cache]
 -LOCAL_DATA_DIR = /opt/graphite/storage/whisper/

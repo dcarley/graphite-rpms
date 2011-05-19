@@ -1,5 +1,6 @@
---- bin/carbon-aggregator.py.orig	2011-04-21 14:10:45.000000000 -0400
-+++ bin/carbon-aggregator.py	2011-04-21 14:20:52.000000000 -0400
+diff -Nru a/bin/carbon-aggregator.py b/bin/carbon-aggregator.py
+--- a/bin/carbon-aggregator.py	2011-05-19 05:28:30.000000000 +0100
++++ b/bin/carbon-aggregator.py	2011-05-19 05:29:21.000000000 +0100
 @@ -20,19 +20,17 @@
  # Figure out where we're installed
  BIN_DIR = dirname( os.path.abspath(__file__) )
@@ -24,8 +25,9 @@
  parser.add_option('--config', default=join(CONF_DIR, 'carbon.conf'), help='Use the given config file')
  parser.add_option('--rules', default=join(CONF_DIR, 'aggregation-rules.conf'), help='Use the give aggregation rules file')
  parser.add_option('--logdir', default=LOG_DIR, help="Write logs in the given directory")
---- bin/carbon-cache.py.orig	2011-04-21 14:09:21.000000000 -0400
-+++ bin/carbon-cache.py	2011-04-21 14:21:25.000000000 -0400
+diff -Nru a/bin/carbon-cache.py b/bin/carbon-cache.py
+--- a/bin/carbon-cache.py	2011-05-19 05:28:30.000000000 +0100
++++ b/bin/carbon-cache.py	2011-05-19 05:29:21.000000000 +0100
 @@ -38,14 +38,11 @@
  # Figure out where we're installed
  BIN_DIR = dirname( os.path.abspath(__file__) )
@@ -53,8 +55,9 @@
  parser.add_option('--config', default=join(CONF_DIR, 'carbon.conf'), help='Use the given config file')
  parser.add_option('--logdir', default=LOG_DIR, help="Write logs in the given directory")
  
---- bin/carbon-relay.py.orig	2011-04-21 14:10:51.000000000 -0400
-+++ bin/carbon-relay.py	2011-04-21 14:21:27.000000000 -0400
+diff -Nru a/bin/carbon-relay.py b/bin/carbon-relay.py
+--- a/bin/carbon-relay.py	2011-05-19 05:28:30.000000000 +0100
++++ b/bin/carbon-relay.py	2011-05-19 05:29:21.000000000 +0100
 @@ -32,22 +32,19 @@
  
  
