@@ -1,0 +1,1 @@
+/srv/carbon(/.*)?   gen_context(system_u:object_r:var_lib_t,s0)

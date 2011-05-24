@@ -1,0 +1,1 @@
+/var/lib/graphite-web(/.*)?     gen_context(system_u:object_r:httpd_sys_content_t,s0)

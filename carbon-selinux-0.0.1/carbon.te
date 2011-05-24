@@ -1,0 +1,5 @@
+policy_module(carbon, 0.0.1)
+
+require {
+    type var_lib_t;
+};
