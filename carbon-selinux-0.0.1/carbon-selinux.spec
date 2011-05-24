@@ -14,7 +14,7 @@ Source2         : %{modulename}.if
 URL             : http://labs.yell.com/
 Vendor          : Yell Labs
 License         : BSD
-Packager        : Dan Carley <dan.carley@yellgroup.com>
+Packager        : Dan Carley <dan.carley@gmail.com>
 
 BuildArch       : noarch
 BuildRoot       : %{_tmppath}/%{name}-%{version}-root
@@ -79,5 +79,5 @@ fi
 %{_datadir}/selinux/*/%{modulename}.pp
 
 %changelog
-* Tue May 24 2011 Dan Carley <dan.carley@yellgroup.com> 0.1.0-1
+* Tue May 24 2011 Dan Carley <dan.carley@gmail.com> 0.1.0-1
 - Initial release.

@@ -1,29 +1,25 @@
-%define ver  0.9.8
-%define rel  1
-%define dist cja
-
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 %define __touch    /bin/touch
 %define __service  /sbin/service
 
-Name:          graphite-web
-Version:       %{ver}
-Release:       %{rel}%{?dist:.%{dist}}
-Summary:       Enterprise scalable realtime graphing
-Group:         Applications/Internet
-License:       Apache License
-URL:           https://launchpad.net/graphite
-Vendor:        Chris Davis <chrismd@gmail.com>
-Packager:      Chris Abernethy <cabernet@chrisabernethy.com>
-Source0:       %{name}-%{version}.tar.gz
-Source1:       graphite-vhost.conf
-Patch0:        graphite-setup.patch
-Patch1:        graphite-config.patch
-BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildArch:     noarch
-BuildRequires: python python-devel python-setuptools
-Requires:      Django httpd mod_wsgi pycairo python-sqlite2
+Name:           graphite-web
+Version:        0.9.8
+Release:        2
+Summary:        Enterprise scalable realtime graphing
+Group:          Applications/Internet
+License:        Apache License
+URL:            https://launchpad.net/graphite
+Vendor:         Chris Davis <chrismd@gmail.com>
+Packager:       Dan Carley <dan.carley@gmail.com>
+Source0:        %{name}-%{version}.tar.gz
+Source1:        graphite-vhost.conf
+Patch0:         graphite-setup.patch
+Patch1:         graphite-config.patch
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildArch:      noarch
+BuildRequires:  python python-devel python-setuptools
+Requires:       Django httpd mod_wsgi pycairo python-sqlite2
 
 %description
 Graphite consists of a storage backend and a web-based visualization frontend.
@@ -107,6 +103,12 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 %ghost %{_localstatedir}/lib/%{name}/graphite.db
 
 %changelog
+* Mon May 23 2011 Dan Carley <dan.carley@gmail.com> - 0.9.8-2
+- Repackage with some tidying.
+- Move state directory to /var/lib
+- Remove debug print to stdout.
+- Don't restart Apache. Kind of obtrusive.
+
 * Tue Apr 19 2011 Chris Abernethy <cabernet@chrisabernethy.com> - 0.9.8-1
 - Update source to upstream v0.9.8
 - Minor updates to spec file
