@@ -1,0 +1,116 @@
+diff -ru a/conf/graphite.wsgi.example b/conf/graphite.wsgi.example
+--- a/conf/graphite.wsgi.example	2011-04-04 03:32:41.000000000 +0100
++++ b/conf/graphite.wsgi.example	2011-05-14 23:48:34.000000000 +0100
+@@ -1,5 +1,5 @@
+ import os, sys
+-sys.path.append('/opt/graphite/webapp')
++sys.path.append('/usr/share/graphite/webapp')
+ os.environ['DJANGO_SETTINGS_MODULE'] = 'graphite.settings'
+ 
+ import django.core.handlers.wsgi
+diff -ru a/examples/example-graphite-vhost.conf b/examples/example-graphite-vhost.conf
+--- a/examples/example-graphite-vhost.conf	2011-04-04 03:35:52.000000000 +0100
++++ b/examples/example-graphite-vhost.conf	2011-05-14 23:48:34.000000000 +0100
+@@ -1,47 +1,51 @@
+ # This needs to be in your server's config somewhere, probably
+ # the main httpd.conf
+-# NameVirtualHost *:80
++NameVirtualHost *:80
++
++<Ifmodule !mod_wsgi.c>
++    LoadModule wsgi_module modules/mod_wsgi.so
++    WSGISocketPrefix  /var/run/wsgi
++</Ifmodule>
+ 
+ # You may need to manually edit this file to fit your needs.
+ # This configuration assumes the default installation prefix
+-# of /opt/graphite/, if you installed graphite somewhere else
+-# you will need to change all the occurances of /opt/graphite/
++# of /usr/share/graphite/, if you installed graphite somewhere else
++# you will need to change all the occurances of /usr/share/graphite/
+ # in this file to your chosen install location.
+ 
+ <VirtualHost *:80>
+-        ServerName graphite
+-        DocumentRoot "/opt/graphite/webapp"
+-        ErrorLog /opt/graphite/storage/log/webapp/error.log
+-        CustomLog /opt/graphite/storage/log/webapp/access.log common
++
++        ServerName   graphite
++        DocumentRoot /usr/share/graphite/webapp
++
++        ErrorLog     /var/log/graphite-web/error.log
++        CustomLog    /var/log/graphite-web/access.log combined
+ 
+         # I've found that an equal number of processes & threads tends
+         # to show the best performance for Graphite (ymmv).
+-        WSGIDaemonProcess graphite processes=5 threads=5 display-name='%{GROUP}' inactivity-timeout=120
+-        WSGIProcessGroup graphite
+ 
+-        # You will need to create this file! There is a graphite.wsgi.example
+-        # file in this directory that you can safely use, just copy it to graphite.wgsi
+-        WSGIScriptAlias / /opt/graphite/conf/graphite.wsgi 
++        WSGIDaemonProcess graphite processes=5 threads=5 display-name='%{GROUP}' inactivity-timeout=120
++        WSGIProcessGroup  graphite
++        WSGIScriptAlias   / /usr/share/graphite/graphite-web.wsgi 
+ 
+-        Alias /content/ /opt/graphite/webapp/content/
+         <Location "/content/">
+-                SetHandler None
++            SetHandler None
+         </Location>
+ 
+-        # NOTE: In order for the django admin site media to work you
+-        # must change @DJANGO_ROOT@ to be the path to your django
+-        # installation, which is probably something like:
+-        # /usr/lib/python2.6/site-packages/django
+-        Alias /media/ "@DJANGO_ROOT@/contrib/admin/media/"
++        # You may need to modify the path to your Django installation
++        # root, i.e., if you are using Python v2.6.
++
++        Alias /media/ "/usr/lib/python2.4/site-packages/django/contrib/admin/media/"
+         <Location "/media/">
+-                SetHandler None
++            SetHandler None
+         </Location>
+ 
+-        # The graphite.wsgi file has to be accessible by apache. It won't
++        # The graphite.wsgi file has to be accessible by Apache. It won't
+         # be visible to clients because of the DocumentRoot though.
+-        <Directory /opt/graphite/conf/>
+-                Order deny,allow
+-                Allow from all
++
++        <Directory /usr/share/graphite/>
++            Order Deny,Allow
++            Allow From All
+         </Directory>
+ 
+ </VirtualHost>
+diff -ru a/webapp/graphite/settings.py b/webapp/graphite/settings.py
+--- a/webapp/graphite/settings.py	2011-04-01 20:48:43.000000000 +0100
++++ b/webapp/graphite/settings.py	2011-05-14 23:48:34.000000000 +0100
+@@ -22,16 +22,15 @@
+ # Filesystem layout (all directores should end in a /)
+ WEB_DIR = dirname( abspath(__file__) ) + '/'
+ WEBAPP_DIR = dirname( dirname(WEB_DIR) ) + '/'
+-GRAPHITE_ROOT = dirname( dirname(WEBAPP_DIR) ) + '/'
+-CONF_DIR = GRAPHITE_ROOT + 'conf/'
+-CONTENT_DIR = WEBAPP_DIR + 'content/'
+-STORAGE_DIR = GRAPHITE_ROOT + 'storage/'
+-WHISPER_DIR = STORAGE_DIR + 'whisper/'
+-RRD_DIR = STORAGE_DIR + 'rrd/'
+-LISTS_DIR = STORAGE_DIR + 'lists/'
++CONF_DIR = '/etc/graphite-web/'
++CONTENT_DIR = '/usr/share/graphite/webapp/content/'
++STORAGE_DIR = '/var/lib/graphite-web/'
++WHISPER_DIR = '/var/lib/carbon/whisper/'
++RRD_DIR = '/var/lib/carbon/rrd/'
++LISTS_DIR = '/var/lib/carbon/lists/'
+ INDEX_FILE = STORAGE_DIR + 'index'
+ WHITELIST_FILE = LISTS_DIR + 'whitelist'
+-LOG_DIR = STORAGE_DIR + 'log/webapp/'
++LOG_DIR = '/var/log/graphite-web/'
+ THIRDPARTY_DIR = WEB_DIR + 'thirdparty/'
+ CLUSTER_SERVERS = []
+ 
