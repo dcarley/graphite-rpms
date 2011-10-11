@@ -20,7 +20,7 @@ Patch3:         graphite-web-wsgi.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  python python-devel python-setuptools
-Requires:       Django httpd mod_wsgi pycairo python-sqlite2
+Requires:       Django django-tagging httpd mod_wsgi pycairo python-sqlite2 python-simplejson
 
 %description
 Graphite consists of a storage backend and a web-based visualization frontend.
