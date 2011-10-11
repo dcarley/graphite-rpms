@@ -13,7 +13,7 @@ URL:            https://launchpad.net/graphite
 Vendor:         Chris Davis <chrismd@gmail.com>
 Packager:       Dan Carley <dan.carley@gmail.com>
 Source0:        http://launchpad.net/graphite/0.9/%{version}/+download/%{name}-%{version}.tar.gz
-Patch0:         graphite-setup.patch
+Patch0:         graphite-web-setup.patch
 Patch1:         graphite-config.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
