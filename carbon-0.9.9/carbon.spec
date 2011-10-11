@@ -18,8 +18,7 @@ Vendor:         Chris Davis <chrismd@gmail.com>
 Packager:       Dan Carley <dan.carley@gmail.com>
 Source0:        http://launchpad.net/graphite/0.9/%{version}/+download/%{name}-%{version}.tar.gz
 Patch0:         %{name}-setup.patch
-Patch1:         %{name}-scripts.patch
-Patch2:         %{name}-config.patch
+Patch1:         %{name}-config.patch
 Source1:        %{name}.init
 Source2:        %{name}.sysconfig
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -36,7 +35,6 @@ The backend for Graphite. Carbon is a data collection and storage agent.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")' build
