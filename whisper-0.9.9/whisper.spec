@@ -1,8 +1,8 @@
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           whisper
-Version:        0.9.8
-Release:        2
+Version:        0.9.9
+Release:        1
 Summary:        Fixed size round-robin style database
 Group:          Applications/Databases
 License:        Apache Software License 2.0
@@ -41,6 +41,9 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 /usr/bin/*
 
 %changelog
+* Sat Oct 8 2011 Dan Carley <dan.carley@gmail.com> - 0.9.9-1
+- New upstream version.
+
 * Mon May 23 2011 Dan Carley <dan.carley@gmail.com> - 0.9.8-2
 - Repackage with minor changes.
 

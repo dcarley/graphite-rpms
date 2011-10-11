@@ -8,8 +8,8 @@
 %define __service  /sbin/service
 
 Name:           carbon
-Version:        0.9.8
-Release:        2
+Version:        0.9.9
+Release:        1
 Summary:        Backend data caching and persistence daemon for Graphite
 Group:          Applications/Internet
 License:        Apache Software License 2.0
@@ -104,6 +104,9 @@ exit 0
 %ghost %{_localstatedir}/run/%{name}.pid
 
 %changelog
+* Sat Oct 8 2011 Dan Carley <dan.carley@gmail.com> - 0.9.9-1
+- New upstream version.
+
 * Mon May 23 2011 Dan Carley <dan.carley@gmail.com> - 0.9.8-2
 - Repackage with minor changes.
 - Require later version of python-twisted-core to fix textFromEventDict error.

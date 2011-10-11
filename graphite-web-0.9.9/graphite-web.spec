@@ -4,8 +4,8 @@
 %define __service  /sbin/service
 
 Name:           graphite-web
-Version:        0.9.8
-Release:        2
+Version:        0.9.9
+Release:        1
 Summary:        Enterprise scalable realtime graphing
 Group:          Applications/Internet
 License:        Apache License
@@ -103,6 +103,9 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 %ghost %{_localstatedir}/lib/%{name}/graphite.db
 
 %changelog
+* Sat Oct 8 2011 Dan Carley <dan.carley@gmail.com> - 0.9.9-1
+- New upstream version.
+
 * Mon May 23 2011 Dan Carley <dan.carley@gmail.com> - 0.9.8-2
 - Repackage with some tidying.
 - Move state directory to /var/lib
