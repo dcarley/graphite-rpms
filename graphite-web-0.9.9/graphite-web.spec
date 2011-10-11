@@ -14,7 +14,9 @@ Vendor:         Chris Davis <chrismd@gmail.com>
 Packager:       Dan Carley <dan.carley@gmail.com>
 Source0:        http://launchpad.net/graphite/0.9/%{version}/+download/%{name}-%{version}.tar.gz
 Patch0:         graphite-web-setup.patch
-Patch1:         graphite-config.patch
+Patch1:         graphite-web-settings.patch
+Patch2:         graphite-web-vhost.patch
+Patch3:         graphite-web-wsgi.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  python python-devel python-setuptools
@@ -36,6 +38,8 @@ scalability.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")' build

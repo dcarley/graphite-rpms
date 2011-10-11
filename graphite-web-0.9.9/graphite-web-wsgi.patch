@@ -1,0 +1,10 @@
+diff -ru a/conf/graphite.wsgi.example b/conf/graphite.wsgi.example
+--- a/conf/graphite.wsgi.example	2011-04-04 03:32:41.000000000 +0100
++++ b/conf/graphite.wsgi.example	2011-05-14 23:48:34.000000000 +0100
+@@ -1,5 +1,5 @@
+ import os, sys
+-sys.path.append('/opt/graphite/webapp')
++sys.path.append('/usr/share/graphite/webapp')
+ os.environ['DJANGO_SETTINGS_MODULE'] = 'graphite.settings'
+ 
+ import django.core.handlers.wsgi
