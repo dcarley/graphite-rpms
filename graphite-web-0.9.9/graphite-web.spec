@@ -76,6 +76,19 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 %{__python} %{python_sitelib}/graphite/manage.py syncdb --noinput >/dev/null
 %{__chown} apache:apache %{_localstatedir}/lib/%{name}/graphite.db
 
+%posttrans
+# TEMPORARY FIX
+#
+# The 0.9.8-x versions of this RPM symlinked local_settings.py in during %post
+# and removed it during %preun. This was replaced in 0.9.9-1 with a standard
+# %files entry.
+#
+# When upgrading from 0.9.8 to 0.9.9 the %preun action of the previous version
+# removes the %files entry of the new version. This check reinstates the
+# symlink. It does not affect fresh installs and can be removed in subsequent
+# releases.
+[ -e %{python_sitelib}/graphite/local_settings.py ] || \
+    %{__ln_s} %{_sysconfdir}/%{name}/local_settings.py %{python_sitelib}/graphite/local_settings.py
 
 %clean
 [ "%{buildroot}" != "/" ] && %{__rm} -rf %{buildroot}
