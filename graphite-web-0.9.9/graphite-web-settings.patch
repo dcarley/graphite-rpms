@@ -1,27 +1,32 @@
 diff -ru a/webapp/graphite/settings.py b/webapp/graphite/settings.py
---- a/webapp/graphite/settings.py	2011-04-01 20:48:43.000000000 +0100
-+++ b/webapp/graphite/settings.py	2011-05-14 23:48:34.000000000 +0100
-@@ -22,16 +22,15 @@
- # Filesystem layout (all directores should end in a /)
- WEB_DIR = dirname( abspath(__file__) ) + '/'
- WEBAPP_DIR = dirname( dirname(WEB_DIR) ) + '/'
--GRAPHITE_ROOT = dirname( dirname(WEBAPP_DIR) ) + '/'
--CONF_DIR = GRAPHITE_ROOT + 'conf/'
--CONTENT_DIR = WEBAPP_DIR + 'content/'
--STORAGE_DIR = GRAPHITE_ROOT + 'storage/'
--WHISPER_DIR = STORAGE_DIR + 'whisper/'
--RRD_DIR = STORAGE_DIR + 'rrd/'
--LISTS_DIR = STORAGE_DIR + 'lists/'
+--- a/webapp/graphite/settings.py	2011-10-05 09:49:54.000000000 +0100
++++ b/webapp/graphite/settings.py	2011-10-11 16:28:21.000000000 +0100
+@@ -28,12 +28,13 @@
+ CSS_DIR = CONTENT_DIR + 'css/'
+ THIRDPARTY_DIR = WEB_DIR + 'thirdparty/'
+ 
+-CONF_DIR = os.environ.get('GRAPHITE_CONF_DIR', GRAPHITE_ROOT + 'conf/')
+-STORAGE_DIR = os.environ.get('GRAPHITE_STORAGE_DIR', GRAPHITE_ROOT + 'storage/')
++# Config, logs and variable state data belong outside of /usr/share
 +CONF_DIR = '/etc/graphite-web/'
-+CONTENT_DIR = '/usr/share/graphite/webapp/content/'
 +STORAGE_DIR = '/var/lib/graphite-web/'
-+WHISPER_DIR = '/var/lib/carbon/whisper/'
-+RRD_DIR = '/var/lib/carbon/rrd/'
-+LISTS_DIR = '/var/lib/carbon/lists/'
+ LISTS_DIR = STORAGE_DIR + 'lists/'
  INDEX_FILE = STORAGE_DIR + 'index'
  WHITELIST_FILE = LISTS_DIR + 'whitelist'
 -LOG_DIR = STORAGE_DIR + 'log/webapp/'
 +LOG_DIR = '/var/log/graphite-web/'
- THIRDPARTY_DIR = WEB_DIR + 'thirdparty/'
+ 
  CLUSTER_SERVERS = []
  
+@@ -44,8 +45,9 @@
+ # local_settings.py, instead you should override DATA_DIRS
+ # to list all directories that should be searched for files
+ # of a supported format.
+-WHISPER_DIR = STORAGE_DIR + 'whisper/'
+-RRD_DIR = STORAGE_DIR + 'rrd/'
++CARBON_DIR = '/var/lib/carbon/'
++WHISPER_DIR = CARBON_DIR + 'whisper/'
++RRD_DIR = CARBON_DIR + 'rrd/'
+ try:
+   import rrdtool
+   DATA_DIRS = [WHISPER_DIR, RRD_DIR]
