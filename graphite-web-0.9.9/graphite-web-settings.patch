@@ -1,7 +1,12 @@
 diff -ru a/webapp/graphite/settings.py b/webapp/graphite/settings.py
 --- a/webapp/graphite/settings.py	2011-10-05 09:49:54.000000000 +0100
-+++ b/webapp/graphite/settings.py	2011-10-11 16:28:21.000000000 +0100
-@@ -28,12 +28,13 @@
++++ b/webapp/graphite/settings.py	2011-10-12 15:21:04.000000000 +0100
+@@ -24,16 +24,17 @@
+ WEB_DIR = dirname( abspath(__file__) ) + '/'
+ WEBAPP_DIR = dirname( dirname(WEB_DIR) ) + '/'
+ GRAPHITE_ROOT = dirname( dirname(WEBAPP_DIR) ) + '/'
+-CONTENT_DIR = WEBAPP_DIR + 'content/'
++CONTENT_DIR = '/usr/share/graphite/webapp/content/'
  CSS_DIR = CONTENT_DIR + 'css/'
  THIRDPARTY_DIR = WEB_DIR + 'thirdparty/'
  
