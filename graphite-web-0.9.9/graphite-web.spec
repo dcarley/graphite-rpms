@@ -68,19 +68,14 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 %{__install} -Dp -m0755 conf/graphite.wsgi.example %{buildroot}/usr/share/graphite/%{name}.wsgi
 %{__install} -Dp -m0644 examples/example-graphite-vhost.conf %{buildroot}%{_sysconfdir}/httpd/conf.d/%{name}.conf
 
-%post
-
 # Create local_settings symlink
-%{__ln_s} %{_sysconfdir}/%{name}/local_settings.py %{python_sitelib}/graphite/local_settings.py
+%{__ln_s} %{_sysconfdir}/%{name}/local_settings.py %{buildroot}%{python_sitelib}/graphite/local_settings.py
 
+%post
 # Initialize the database
 %{__python} %{python_sitelib}/graphite/manage.py syncdb --noinput >/dev/null
 %{__chown} apache:apache %{_localstatedir}/lib/%{name}/graphite.db
 
-%preun
-
-# Remove local_settings symlink
-%{__rm} -f %{python_sitelib}/graphite/local_settings.py
 
 %clean
 [ "%{buildroot}" != "/" ] && %{__rm} -rf %{buildroot}
