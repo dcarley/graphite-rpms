@@ -9,7 +9,7 @@
 
 Name:           carbon
 Version:        0.9.9
-Release:        1
+Release:        2
 Summary:        Backend data caching and persistence daemon for Graphite
 Group:          Applications/Internet
 License:        Apache Software License 2.0
@@ -102,6 +102,9 @@ exit 0
 %ghost %{_localstatedir}/run/%{name}.pid
 
 %changelog
+* Mon Oct 17 2011 Dan Carley <dan.carley@gmail.com> - 0.9.9-2
+- Fix config for relocated data directories.
+
 * Sat Oct 8 2011 Dan Carley <dan.carley@gmail.com> - 0.9.9-1
 - New upstream version.
 

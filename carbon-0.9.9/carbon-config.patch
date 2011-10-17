@@ -1,6 +1,6 @@
 diff -ru a/conf/carbon.conf.example b/conf/carbon.conf.example
---- a/conf/carbon.conf.example	2011-10-07 22:37:14.000000000 +0100
-+++ b/conf/carbon.conf.example	2011-10-07 22:38:45.000000000 +0100
+--- a/conf/carbon.conf.example	2011-10-05 08:17:52.000000000 +0100
++++ b/conf/carbon.conf.example	2011-10-17 15:15:41.000000000 +0100
 @@ -22,18 +22,18 @@
  #   PID_DIR        = STORAGE_DIR/
  #
@@ -11,13 +11,14 @@ diff -ru a/conf/carbon.conf.example b/conf/carbon.conf.example
 -#   LOG_DIR        = /var/log/carbon/
 -#   PID_DIR        = /var/run/
 -#
+-#LOCAL_DATA_DIR = /opt/graphite/storage/whisper/
 +
 +STORAGE_DIR    = /var/lib/carbon/
++LOCAL_DATA_DIR = /var/lib/carbon/whisper/
++WHITELISTS_DIR = /var/lib/carbon/lists/
 +CONF_DIR       = /etc/carbon/
 +LOG_DIR        = /var/log/carbon/
 +PID_DIR        = /var/run/
-+
- #LOCAL_DATA_DIR = /opt/graphite/storage/whisper/
  
  # Specify the user to drop privileges to
  # If this is blank carbon runs as the user that invokes it
