@@ -9,7 +9,7 @@
 
 Name:           carbon
 Version:        0.9.8
-Release:        2
+Release:        3
 Summary:        Backend data caching and persistence daemon for Graphite
 Group:          Applications/Internet
 License:        Apache Software License 2.0
@@ -27,7 +27,7 @@ BuildArch:      noarch
 
 BuildRequires:  python python-devel python-setuptools
 Requires:       python whisper
-Requires:       python-twisted-core >= 0.8
+Requires:       python-twisted-core >= 8.0
 
 %description
 The backend for Graphite. Carbon is a data collection and storage agent.  
@@ -104,6 +104,9 @@ exit 0
 %ghost %{_localstatedir}/run/%{name}.pid
 
 %changelog
+* Wed Nov 2 2011 Dan Carley <dan.carley@gmail.com> - 0.9.8-3
+- Correct python-twisted-core dependency from 0.8 to 8.0
+
 * Mon May 23 2011 Dan Carley <dan.carley@gmail.com> - 0.9.8-2
 - Repackage with minor changes.
 - Require later version of python-twisted-core to fix textFromEventDict error.
