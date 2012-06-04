@@ -8,8 +8,8 @@
 %define __service  /sbin/service
 
 Name:           carbon
-Version:        0.9.9
-Release:        4
+Version:        0.9.10
+Release:        1
 Summary:        Backend data caching and persistence daemon for Graphite
 Group:          Applications/Internet
 License:        Apache Software License 2.0
@@ -85,7 +85,9 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 exit 0
 
 %preun
-%{__service} %{name} stop
+%{__service} %{name}-cache stop
+%{__service} %{name}-relay stop
+%{__service} %{name}-aggregator stop
 exit 0
 
 %postun
@@ -108,10 +110,10 @@ exit 0
 %{_initrddir}/%{name}-relay
 %{_initrddir}/%{name}-aggregator
 
-%config %{_sysconfdir}/%{name}
-%config %{_sysconfdir}/sysconfig/%{name}-cache
-%config %{_sysconfdir}/sysconfig/%{name}-relay
-%config %{_sysconfdir}/sysconfig/%{name}-aggregator
+%config(noreplace) %{_sysconfdir}/%{name}
+%config(noreplace) %{_sysconfdir}/sysconfig/%{name}-cache
+%config(noreplace) %{_sysconfdir}/sysconfig/%{name}-relay
+%config(noreplace) %{_sysconfdir}/sysconfig/%{name}-aggregator
 
 %attr(-,%name,%name) %{_localstatedir}/lib/%{name}
 %attr(-,%name,%name) %{_localstatedir}/log/%{name}-cache
@@ -126,6 +128,9 @@ exit 0
 %ghost %{_localstatedir}/run/%{name}-aggregator.pid
 
 %changelog
+* Thu May 21 2012 Justin Burnham <justin@jburnham.net> - 0.9.10-1
+- New upstream version.
+
 * Fri Feb 17 2012 Justin Burnham <justin@jburnham.net> - 0.9.9-4
 - Adding carbon-relay and carbon-aggregator support.
 - Standardized naming to make things more specific.

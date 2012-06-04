@@ -1,22 +1,22 @@
 #!/bin/sh
 #
-# carbon-cache  init file for starting up the carbon-cache daemon
+# carbon-relay  init file for starting up the carbon-relay daemon
 #
 # chkconfig:   - 20 80
-# description: Starts and stops the carbon-cache daemon.
+# description: Starts and stops the carbon-relay daemon.
 
 # Source function library.
 . /etc/rc.d/init.d/functions
 
-exec="/usr/bin/carbon-cache.py"
-pidfile="/var/run/carbon.pid"
+exec="/usr/bin/carbon-relay.py"
+pidfile="/var/run/carbon-relay.pid"
 
 CONFIG="/etc/carbon/carbon.conf"
-LOG_DIR="/var/log/carbon"
+LOG_DIR="/var/log/carbon-relay"
 
-[ -e /etc/sysconfig/carbon ] && . /etc/sysconfig/carbon
+[ -e /etc/sysconfig/carbon-relay ] && . /etc/sysconfig/carbon-relay
 
-lockfile=/var/lock/subsys/carbon
+lockfile=/var/lock/subsys/carbon-relay
 
 start() {
     [ -f $CONFIG ] || exit 6
@@ -30,7 +30,7 @@ start() {
 }
 
 stop() {
-    echo -n $"Stopping carbon: "
+    echo -n $"Stopping `basename $exec`: "
     killproc -p $pidfile `basename $exec`
     retval=$?
     echo
