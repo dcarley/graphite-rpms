@@ -1,0 +1,78 @@
+#!/bin/sh
+#
+# carbon-aggregator  init file for starting up the carbon-aggregator daemon
+#
+# chkconfig:   - 20 80
+# description: Starts and stops the carbon-aggregator daemon.
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+exec="/usr/bin/carbon-aggregator.py"
+pidfile="/var/run/carbon-aggregator.pid"
+
+CONFIG="/etc/carbon/carbon.conf"
+LOG_DIR="/var/log/carbon-aggregator"
+
+[ -e /etc/sysconfig/carbon-aggregator ] && . /etc/sysconfig/carbon-aggregator
+
+lockfile=/var/lock/subsys/carbon-aggregator
+
+start() {
+    [ -f $CONFIG ] || exit 6
+    [ -x $exec ] || exit 5
+    echo -n $"Starting `basename $exec`: "
+    daemon "$exec --config=$CONFIG --pidfile=$pidfile --logdir=$LOG_DIR start"
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && touch $lockfile
+    return $retval
+}
+
+stop() {
+    echo -n $"Stopping `basename $exec`: "
+    killproc -p $pidfile `basename $exec`
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && rm -f $lockfile
+    return $retval
+}
+
+restart() {
+    stop
+    start
+}
+
+rh_status() {
+    status -p $pidfile `basename $exec`
+}
+
+rh_status_q() {
+    rh_status >/dev/null 2>&1
+}
+
+case "$1" in
+    start)
+        rh_status_q && exit 0
+        $1
+        ;;
+    stop)
+        rh_status_q || exit 0
+        $1
+        ;;
+    restart)
+        $1
+        ;;
+    status)
+        rh_status
+        ;;
+    condrestart|try-restart)
+        rh_status_q || exit 0
+        restart
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart|condrestart|try-restart}"
+        exit 2
+esac
+exit $?
+

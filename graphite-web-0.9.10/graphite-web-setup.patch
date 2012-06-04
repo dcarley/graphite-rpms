@@ -1,0 +1,22 @@
+diff -Nru a/setup.cfg b/setup.cfg
+--- a/setup.cfg	2012-05-31 02:28:54.000000000 -0400
++++ b/setup.cfg	2012-06-01 13:53:32.505843979 -0400
+@@ -1,6 +1,5 @@
+ [install]
+-prefix = /opt/graphite
+-install-lib = %(prefix)s/webapp
++install-data=/usr/share/graphite
+ 
+ [bdist_rpm]
+ requires = Django => 1.1.4
+diff -Nru a/setup.py b/setup.py
+--- a/setup.py	2012-05-31 16:30:12.000000000 -0400
++++ b/setup.py	2012-06-01 13:54:59.066275567 -0400
+@@ -60,6 +60,6 @@
+   package_data={'graphite' :
+     ['templates/*', 'local_settings.py.example']},
+   scripts=glob('bin/*'),
+-  data_files=webapp_content.items() + storage_dirs + conf_files + examples,
++  data_files=webapp_content.items(),
+   **setup_kwargs
+ )

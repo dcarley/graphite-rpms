@@ -1,0 +1,47 @@
+diff -Nru a/webapp/graphite/settings.py b/webapp/graphite/settings.py
+--- a/webapp/graphite/settings.py	2012-05-31 16:30:23.000000000 -0400
++++ b/webapp/graphite/settings.py	2012-06-01 13:49:00.845300636 -0400
+@@ -43,6 +43,7 @@
+ WHITELIST_FILE = ''
+ INDEX_FILE = ''
+ LOG_DIR = ''
++CARBON_DIR = '/var/lib/carbon'
+ WHISPER_DIR = ''
+ RRD_DIR = ''
+ DATA_DIRS = []
+@@ -119,29 +120,29 @@
+ ## Set config dependent on flags set in local_settings
+ # Path configuration
+ if not CONTENT_DIR:
+-  CONTENT_DIR = join(WEBAPP_DIR, 'content')
++  CONTENT_DIR = '/usr/share/graphite/webapp/content'
+ if not CSS_DIR:
+   CSS_DIR = join(CONTENT_DIR, 'css')
+ 
+ if not CONF_DIR:
+-  CONF_DIR = os.environ.get('GRAPHITE_CONF_DIR', join(GRAPHITE_ROOT, 'conf'))
++  CONF_DIR = '/etc/graphite-web'
+ if not DASHBOARD_CONF:
+   DASHBOARD_CONF = join(CONF_DIR, 'dashboard.conf')
+ if not GRAPHTEMPLATES_CONF:
+   GRAPHTEMPLATES_CONF = join(CONF_DIR, 'graphTemplates.conf')
+ 
+ if not STORAGE_DIR:
+-  STORAGE_DIR = os.environ.get('GRAPHITE_STORAGE_DIR', join(GRAPHITE_ROOT, 'storage'))
++  STORAGE_DIR = '/var/lib/graphite-web'
+ if not WHITELIST_FILE:
+   WHITELIST_FILE = join(STORAGE_DIR, 'lists', 'whitelist')
+ if not INDEX_FILE:
+   INDEX_FILE = join(STORAGE_DIR, 'index')
+ if not LOG_DIR:
+-  LOG_DIR = join(STORAGE_DIR, 'log', 'webapp')
++  LOG_DIR = '/var/log/graphite-web'
+ if not WHISPER_DIR:
+-  WHISPER_DIR = join(STORAGE_DIR, 'whisper/')
++  WHISPER_DIR = join(CARBON_DIR, 'whisper/')
+ if not RRD_DIR:
+-  RRD_DIR = join(STORAGE_DIR, 'rrd/')
++  RRD_DIR = join(CARBON_DIR, 'rrd/')
+ if not DATA_DIRS:
+   if rrdtool and os.path.exists(RRD_DIR):
+     DATA_DIRS = [WHISPER_DIR, RRD_DIR]
