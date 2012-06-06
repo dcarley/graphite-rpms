@@ -16,7 +16,7 @@ License:        Apache Software License 2.0
 URL:            https://launchpad.net/graphite
 Vendor:         Chris Davis <chrismd@gmail.com>
 Packager:       Dan Carley <dan.carley@gmail.com>
-Source0:        http://launchpad.net/graphite/0.9/%{version}/+download/%{name}-%{version}.tar.gz
+Source0:        https://github.com/downloads/graphite-project/%{name}/%{name}-%{version}.tar.gz
 Patch0:         %{name}-setup.patch
 Patch1:         %{name}-config.patch
 Source1:        %{name}-cache.init
