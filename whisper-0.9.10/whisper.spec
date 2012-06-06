@@ -1,7 +1,7 @@
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           whisper
-Version:        0.9.9
+Version:        0.9.10
 Release:        1
 Summary:        Fixed size round-robin style database
 Group:          Applications/Databases
@@ -41,6 +41,9 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 /usr/bin/*
 
 %changelog
+* Fri Jun 1 2012 Ben P <ben@g.megatron.org> - 0.9.10-1
+- New upstream version.
+
 * Sat Oct 8 2011 Dan Carley <dan.carley@gmail.com> - 0.9.9-1
 - New upstream version.
 

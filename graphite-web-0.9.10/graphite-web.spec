@@ -4,7 +4,7 @@
 %define __service  /sbin/service
 
 Name:           graphite-web
-Version:        0.9.9
+Version:        0.9.10
 Release:        1
 Summary:        Enterprise scalable realtime graphing
 Group:          Applications/Internet
@@ -95,7 +95,7 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 
 %files
 %defattr(-,root,root,-)
-%doc INSTALL LICENSE PKG-INFO README conf/* examples/*
+%doc INSTALL LICENSE PKG-INFO conf/* examples/*
 
 %{python_sitelib}/*
 /usr/bin/*
@@ -114,6 +114,9 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 %ghost %{_localstatedir}/lib/%{name}/graphite.db
 
 %changelog
+* Fri Jun 1 2012 Ben P <ben@g.megatron.org> - 0.9.10-1
+- New upstream version.
+
 * Sat Oct 8 2011 Dan Carley <dan.carley@gmail.com> - 0.9.9-1
 - New upstream version.
 

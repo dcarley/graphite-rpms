@@ -1,7 +1,7 @@
 diff -ru a/examples/example-graphite-vhost.conf b/examples/example-graphite-vhost.conf
---- a/examples/example-graphite-vhost.conf	2011-10-04 05:14:08.000000000 +0100
-+++ b/examples/example-graphite-vhost.conf	2011-10-11 16:42:02.000000000 +0100
-@@ -1,57 +1,52 @@
+--- a/examples/example-graphite-vhost.conf	2012-06-07 18:22:18.127743001 +0100
++++ b/examples/example-graphite-vhost.conf	2012-06-07 18:26:53.431743001 +0100
+@@ -1,14 +1,12 @@
  # This needs to be in your server's config somewhere, probably
  # the main httpd.conf
 -# NameVirtualHost *:80
@@ -9,9 +9,6 @@ diff -ru a/examples/example-graphite-vhost.conf b/examples/example-graphite-vhos
  
 -# This line also needs to be in your server's config.
 -# LoadModule wsgi_module modules/mod_wsgi.so
-+<Ifmodule !mod_wsgi.c>
-+    LoadModule wsgi_module modules/mod_wsgi.so
-+</Ifmodule>
  
  # You need to manually edit this file to fit your needs.
  # This configuration assumes the default installation prefix
@@ -21,11 +18,9 @@ diff -ru a/examples/example-graphite-vhost.conf b/examples/example-graphite-vhos
 +# you will need to change all the occurances of /usr/share/graphite/
  # in this file to your chosen install location.
  
--
--# XXX You need to set this up!
- # Read http://code.google.com/p/modwsgi/wiki/ConfigurationDirectives#WSGISocketPrefix
--WSGISocketPrefix /etc/httpd/wsgi/
-+WSGISocketPrefix /var/run/wsgi
+ <IfModule !wsgi_module.c>
+@@ -20,41 +18,37 @@
+ WSGISocketPrefix run/wsgi
  
  <VirtualHost *:80>
 -        ServerName graphite
@@ -66,10 +61,10 @@ diff -ru a/examples/example-graphite-vhost.conf b/examples/example-graphite-vhos
 -        </Directory>
 +    ServerName   graphite
 +    DocumentRoot /usr/share/graphite/webapp
-+
+ 
 +    ErrorLog     /var/log/graphite-web/error.log
 +    CustomLog    /var/log/graphite-web/access.log combined
- 
++
 +    # I've found that an equal number of processes & threads tends
 +    # to show the best performance for Graphite (ymmv).
 +    WSGIDaemonProcess       graphite processes=5 threads=5 display-name='%{GROUP}' inactivity-timeout=120

@@ -8,8 +8,8 @@
 %define __service  /sbin/service
 
 Name:           carbon
-Version:        0.9.9
-Release:        4
+Version:        0.9.10
+Release:        1
 Summary:        Backend data caching and persistence daemon for Graphite
 Group:          Applications/Internet
 License:        Apache Software License 2.0
@@ -126,6 +126,9 @@ exit 0
 %ghost %{_localstatedir}/run/%{name}-aggregator.pid
 
 %changelog
+* Fri Jun 1 2012 Ben P <ben@g.megatron.org> - 0.9.10-1
+- New upstream version.
+
 * Fri Feb 17 2012 Justin Burnham <justin@jburnham.net> - 0.9.9-4
 - Standardized naming to make things more specific.
 - Old carbon init script is now called carbon-cache.
