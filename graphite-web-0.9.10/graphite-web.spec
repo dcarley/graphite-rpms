@@ -17,6 +17,7 @@ Patch0:         graphite-web-setup.patch
 Patch1:         graphite-web-settings.patch
 Patch2:         graphite-web-vhost.patch
 Patch3:         graphite-web-wsgi.patch
+Patch4:         graphite-web-python24compat.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  python python-devel python-setuptools
@@ -40,6 +41,7 @@ scalability.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")' build
