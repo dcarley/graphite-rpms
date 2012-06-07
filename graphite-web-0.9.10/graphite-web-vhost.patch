@@ -1,0 +1,95 @@
+diff -ru a/examples/example-graphite-vhost.conf b/examples/example-graphite-vhost.conf
+--- a/examples/example-graphite-vhost.conf	2012-06-07 18:22:18.127743001 +0100
++++ b/examples/example-graphite-vhost.conf	2012-06-07 18:26:53.431743001 +0100
+@@ -1,14 +1,12 @@
+ # This needs to be in your server's config somewhere, probably
+ # the main httpd.conf
+-# NameVirtualHost *:80
++NameVirtualHost *:80
+ 
+-# This line also needs to be in your server's config.
+-# LoadModule wsgi_module modules/mod_wsgi.so
+ 
+ # You need to manually edit this file to fit your needs.
+ # This configuration assumes the default installation prefix
+-# of /opt/graphite/, if you installed graphite somewhere else
+-# you will need to change all the occurances of /opt/graphite/
++# of /usr/share/graphite/, if you installed graphite somewhere else
++# you will need to change all the occurances of /usr/share/graphite/
+ # in this file to your chosen install location.
+ 
+ <IfModule !wsgi_module.c>
+@@ -20,41 +18,37 @@
+ WSGISocketPrefix run/wsgi
+ 
+ <VirtualHost *:80>
+-        ServerName graphite
+-        DocumentRoot "/opt/graphite/webapp"
+-        ErrorLog /opt/graphite/storage/log/webapp/error.log
+-        CustomLog /opt/graphite/storage/log/webapp/access.log common
+-
+-        # I've found that an equal number of processes & threads tends
+-        # to show the best performance for Graphite (ymmv).
+-        WSGIDaemonProcess graphite processes=5 threads=5 display-name='%{GROUP}' inactivity-timeout=120
+-        WSGIProcessGroup graphite
+-        WSGIApplicationGroup %{GLOBAL}
+-        WSGIImportScript /opt/graphite/conf/graphite.wsgi process-group=graphite application-group=%{GLOBAL}
+-
+-        # XXX You will need to create this file! There is a graphite.wsgi.example
+-        # file in this directory that you can safely use, just copy it to graphite.wgsi
+-        WSGIScriptAlias / /opt/graphite/conf/graphite.wsgi 
+-
+-        Alias /content/ /opt/graphite/webapp/content/
+-        <Location "/content/">
+-                SetHandler None
+-        </Location>
+-
+-        # XXX In order for the django admin site media to work you
+-        # must change @DJANGO_ROOT@ to be the path to your django
+-        # installation, which is probably something like:
+-        # /usr/lib/python2.6/site-packages/django
+-        Alias /media/ "@DJANGO_ROOT@/contrib/admin/media/"
+-        <Location "/media/">
+-                SetHandler None
+-        </Location>
+-
+-        # The graphite.wsgi file has to be accessible by apache. It won't
+-        # be visible to clients because of the DocumentRoot though.
+-        <Directory /opt/graphite/conf/>
+-                Order deny,allow
+-                Allow from all
+-        </Directory>
++    ServerName   graphite
++    DocumentRoot /usr/share/graphite/webapp
+ 
++    ErrorLog     /var/log/graphite-web/error.log
++    CustomLog    /var/log/graphite-web/access.log combined
++
++    # I've found that an equal number of processes & threads tends
++    # to show the best performance for Graphite (ymmv).
++    WSGIDaemonProcess       graphite processes=5 threads=5 display-name='%{GROUP}' inactivity-timeout=120
++    WSGIProcessGroup        graphite
++    WSGIApplicationGroup    %{GLOBAL}
++
++    WSGIImportScript        /usr/share/graphite/graphite-web.wsgi process-group=graphite application-group=%{GLOBAL}
++    WSGIScriptAlias         / /usr/share/graphite/graphite-web.wsgi
++
++    Alias /content/ /usr/share/graphite/webapp/content/
++    <Location "/content/">
++        SetHandler None
++    </Location>
++
++    # You may need to modify the path to your Django installation
++    # root, i.e., if you are using Python v2.6.
++    Alias /media/ "@DJANGO_ROOT@/contrib/admin/media/"
++    <Location "/media/">
++        SetHandler None
++    </Location>
++
++    # The graphite.wsgi file has to be accessible by apache. It won't
++    # be visible to clients because of the DocumentRoot though.
++    <Directory /usr/share/graphite/>
++        Order deny,allow
++        Allow from all
++    </Directory>
+ </VirtualHost>

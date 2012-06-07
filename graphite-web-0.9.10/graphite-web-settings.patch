@@ -1,0 +1,29 @@
+diff -Nru a/webapp/graphite/settings.py b/webapp/graphite/settings.py
+--- a/webapp/graphite/settings.py	2012-05-31 13:30:23.000000000 -0700
++++ b/webapp/graphite/settings.py	2012-06-01 15:02:24.000000000 -0700
+@@ -34,17 +34,18 @@
+ THIRDPARTY_DIR = join(WEB_DIR,'thirdparty')
+ # Initialize additional path variables
+ # Defaults for these are set after local_settings is imported
+-CONTENT_DIR = ''
+-CSS_DIR = ''
+-CONF_DIR = ''
++CONTENT_DIR = '/usr/share/graphite/webapp/content/'
++CSS_DIR = CONTENT_DIR + 'css/'
++CONF_DIR = '/etc/graphite-web/'
+ DASHBOARD_CONF = ''
+ GRAPHTEMPLATES_CONF = ''
+-STORAGE_DIR = ''
++STORAGE_DIR = '/var/lib/graphite-web/'
+ WHITELIST_FILE = ''
+ INDEX_FILE = ''
+-LOG_DIR = ''
+-WHISPER_DIR = ''
+-RRD_DIR = ''
++LOG_DIR = '/var/log/graphite-web/'
++CARBON_DIR = '/var/lib/carbon/'
++WHISPER_DIR = CARBON_DIR + 'whisper/'
++RRD_DIR = CARBON_DIR + 'rrd/'
+ DATA_DIRS = []
+ 
+ CLUSTER_SERVERS = []

@@ -1,0 +1,38 @@
+diff -Nru a/setup.cfg b/setup.cfg
+--- a/setup.cfg	2012-05-28 23:37:53.000000000 -0700
++++ b/setup.cfg	2012-06-01 14:37:53.000000000 -0700
+@@ -1,6 +1,3 @@
+-[install]
+-prefix = /opt/graphite
+-install-lib = %(prefix)s/lib
+ 
+ [bdist_rpm]
+ requires = python-twisted
+diff -Nru a/setup.py b/setup.py
+--- a/setup.py	2012-05-31 13:32:28.000000000 -0700
++++ b/setup.py	2012-06-01 14:39:26.000000000 -0700
+@@ -11,10 +11,11 @@
+   from distutils.core import setup
+   setup_kwargs = dict()
+ 
+-
+-storage_dirs = [ ('storage/whisper',[]), ('storage/lists',[]),
+-                 ('storage/log',[]), ('storage/rrd',[]) ]
+-conf_files = [ ('conf', glob('conf/*.example')) ]
++storage_dirs = [
++    ('/var/lib/carbon/whisper',[]),
++    ('/var/lib/carbon/lists',[]),
++    ('/var/lib/carbon/rrd',[])
++]
+ #XXX Need a way to have these work for bdist_rpm but be left alone for everything else
+ #init_scripts = [ ('/etc/init.d', ['distro/redhat/init.d/carbon-cache',
+ #                                  'distro/redhat/init.d/carbon-relay',
+@@ -32,7 +33,7 @@
+   package_dir={'' : 'lib'},
+   scripts=glob('bin/*'),
+   package_data={ 'carbon' : ['*.xml'] },
+-  data_files=storage_dirs + conf_files, # + init_scripts,
++  data_files=storage_dirs, # + init_scripts,
+   install_requires=['twisted', 'txamqp'],
+   **setup_kwargs
+ )
