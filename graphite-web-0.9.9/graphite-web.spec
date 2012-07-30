@@ -5,7 +5,7 @@
 
 Name:           graphite-web
 Version:        0.9.9
-Release:        1
+Release:        2
 Summary:        Enterprise scalable realtime graphing
 Group:          Applications/Internet
 License:        Apache License
@@ -20,7 +20,8 @@ Patch3:         graphite-web-wsgi.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  python python-devel python-setuptools
-Requires:       Django django-tagging httpd mod_wsgi pycairo python-sqlite2 python-simplejson
+Requires:       Django django-tagging httpd mod_wsgi pycairo python-simplejson
+%{?el5:Requires: python-sqlite2}
 
 %description
 Graphite consists of a storage backend and a web-based visualization frontend.
@@ -114,6 +115,9 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 %ghost %{_localstatedir}/lib/%{name}/graphite.db
 
 %changelog
+* Mon Jul 30 2012 Brian Pitts <brian@polibyte.com> - 0.9.10-2
+- Do not require pysqlite2 on EL6 since it is already included as sqlite3
+
 * Sat Oct 8 2011 Dan Carley <dan.carley@gmail.com> - 0.9.9-1
 - New upstream version.
 
