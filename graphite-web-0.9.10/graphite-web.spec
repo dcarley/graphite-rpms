@@ -5,7 +5,7 @@
 
 Name:           graphite-web
 Version:        0.9.10
-Release:        2
+Release:        3
 Summary:        Enterprise scalable realtime graphing
 Group:          Applications/Internet
 License:        Apache License
@@ -23,6 +23,7 @@ BuildArch:      noarch
 BuildRequires:  python python-devel python-setuptools
 Requires:       Django django-tagging httpd mod_wsgi pycairo python-simplejson
 %{?el5:Requires: python-sqlite2}
+%{?el6:Requires: bitmap-fonts-compat}
 
 %description
 Graphite consists of a storage backend and a web-based visualization frontend.
@@ -117,6 +118,9 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 %ghost %{_localstatedir}/lib/%{name}/graphite.db
 
 %changelog
+* Thu Oct 4 2012 Dan Carley <dan.carley@gmail.com> - 0.9.10-3
+- Require bitmap-fonts on EL6 to resolve MemoryError exception on render.
+
 * Mon Jul 30 2012 Brian Pitts <brian@polibyte.com> - 0.9.10-2
 - Do not require pysqlite2 on EL6 since it is already included as sqlite3
 
