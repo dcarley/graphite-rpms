@@ -12,7 +12,7 @@ License:        Apache License
 URL:            https://launchpad.net/graphite
 Vendor:         Chris Davis <chrismd@gmail.com>
 Packager:       Dan Carley <dan.carley@gmail.com>
-Source0:        https://github.com/downloads/graphite-project/%{name}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/graphite-project/%{name}/downloads/%{name}-%{version}.tar.gz
 Patch0:         graphite-web-setup.patch
 Patch1:         graphite-web-settings.patch
 Patch2:         graphite-web-vhost.patch
