@@ -5,7 +5,7 @@
 
 Name:           graphite-web
 Version:        0.9.10
-Release:        3
+Release:        4
 Summary:        Enterprise scalable realtime graphing
 Group:          Applications/Internet
 License:        Apache License
@@ -18,6 +18,7 @@ Patch1:         graphite-web-settings.patch
 Patch2:         graphite-web-vhost.patch
 Patch3:         graphite-web-wsgi.patch
 Patch4:         graphite-web-python24compat.patch
+Patch5:         graphite-web-multiplyseries.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  python python-devel python-setuptools
@@ -44,6 +45,7 @@ scalability.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")' build
@@ -118,6 +120,9 @@ CFLAGS="$RPM_OPT_FLAGS" %{__python} -c 'import setuptools; execfile("setup.py")'
 %ghost %{_localstatedir}/lib/%{name}/graphite.db
 
 %changelog
+* Tue Feb 12 2013 Matt Dainty <matt@bodgit-n-scarper.com> - 0.9.10-4
+- Apply fix for multiplySeries bug #1021942
+
 * Thu Oct 4 2012 Dan Carley <dan.carley@gmail.com> - 0.9.10-3
 - Require bitmap-fonts on EL6 to resolve MemoryError exception on render.
 
