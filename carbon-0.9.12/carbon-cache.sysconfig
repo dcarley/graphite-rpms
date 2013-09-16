@@ -1,0 +1,4 @@
+# Configuration file for carbon-cache
+
+# CONFIG=/etc/carbon/carbon.conf
+# LOG_DIR=/var/log/carbon-cache

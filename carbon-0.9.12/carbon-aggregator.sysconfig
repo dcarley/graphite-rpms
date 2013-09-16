@@ -1,0 +1,4 @@
+# Configuration file for carbon-aggregator
+
+# CONFIG=/etc/carbon/carbon.conf
+# LOG_DIR=/var/log/carbon-aggregator
